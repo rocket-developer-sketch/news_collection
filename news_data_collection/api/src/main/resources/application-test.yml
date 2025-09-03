@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:news_api;DB_CLOSE_DELAY=-1;DATABASE_TO_LOWER=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+    hikari:
+      maximum-pool-size: 5
+
+  jpa:
+    hibernate:
+      ddl-auto: update  # 테스트 시 update 또는 create-drop 가능
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+    open-in-view: false
+
+jwt-conf:
+  secret: news-data-jwt-secret-key-two-thousand-twenty-five-july
+  access-token-validity: 1800000  # 30분
+  refresh-token-validity: 3600000  # 1시간
+  cookie:
+    refresh-cookie-name: refresh_token
+    domain: localhost
+    secure: false
+    same-site: Lax
+    path: /

@@ -1,0 +1,11 @@
+server:
+  port: 8083
+
+external:
+  api:
+    url: http://localhost:8082
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.thymeleaf: DEBUG

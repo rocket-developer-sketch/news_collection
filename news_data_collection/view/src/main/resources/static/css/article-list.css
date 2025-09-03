@@ -1,0 +1,35 @@
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .news-card {
+        width: 300px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 12px;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .news-card h3 {
+        margin-top: 0;
+        font-size: 18px;
+    }
+
+    .news-card .meta {
+        font-size: 12px;
+        color: #666;
+        margin-top: 6px;
+    }
+
+    .news-card .meta-content {
+        max-height: 7.5em; /*한 줄 1.5em*/
+        overflow-y: auto;
+        white-space: pre-wrap;
+    }
+
+    .loading {
+        text-align: center;
+        margin: 20px 0;
+    }

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="SidebarFragment">
+    <div>
+        <aside class="aside">
+        <nav>
+            <ul class="aside-group">
+            <li >
+                <a th:href="@{/view/article}">수집 뉴스 보기</a>
+            </li>
+            <li>
+                <a th:href="@{/view/schedule}">스케줄 목록</a>
+            </li>
+            <li>
+                <a th:href="@{/view/schedule/new}">새 스케줄 등록</a>
+            </li>
+            </ul>
+        </nav>
+    </aside>
+</div>

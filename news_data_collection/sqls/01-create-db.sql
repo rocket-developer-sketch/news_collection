@@ -1,0 +1,13 @@
+CREATE DATABASE IF NOT EXISTS news_batch
+    DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+
+CREATE DATABASE IF NOT EXISTS news_api
+    DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+
+CREATE USER 'news_user'@'%' IDENTIFIED BY 'ndb!user432Q';
+CREATE USER 'batch_user'@'%' IDENTIFIED BY 'bdb!user432Q';
+
+GRANT ALL PRIVILEGES ON news_api.* TO 'news_user'@'%';
+GRANT ALL PRIVILEGES ON news_batch.* TO 'batch_user'@'%';
+
+FLUSH PRIVILEGES;

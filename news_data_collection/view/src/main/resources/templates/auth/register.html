@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{common/layouts/basic_layout}" layout:fragment="Content">
+
+    <head>
+        <title th:fragment="title">회원가입</title>
+        <link rel="stylesheet" th:href="@{/css/register.css}" />
+    </head>
+
+    <body>
+        <div>
+
+        <h2>회원가입</h2>
+
+            <form id="registerForm">
+                <label>아이디: <input type="text" name="userId" required></label><br/>
+                <label>비밀번호: <input type="password" id="passwordInput" name="password" required></label>
+                <div id="passwordMessage" style="font-size: 0.9em; margin: 4px 0;"></div>
+                <br/>
+                <label>이메일: <input type="email" name="email" required></label><br/>
+                <button type="submit">가입</button>
+            </form>
+
+            <div id="registerError" style="color:red;"></div>
+    </div>
+
+    <script>
+        const passwordInput = document.getElementById("passwordInput");
+
+        const message = document.getElementById("passwordMessage");
+
+        function validatePassword(pw) {
+            const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+=-]).{8,15}$/;
+            if (!regex.test(pw)) return "비밀번호는 대문자, 소문자, 숫자, 특수문자를 각각 1자 이상 포함하고, 8~15자여야 합니다.";
+            if (/\s/.test(pw)) return "공백은 사용할 수 없습니다.";
+            return "";
+        }
+
+        passwordInput.addEventListener("input", function () {
+            const pw = passwordInput.value;
+            const error = validatePassword(pw);
+            if (pw === "") {
+                message.textContent = "비밀번호를 입력하세요.";
+                message.className = "invalid";
+            } else if (error !== "") {
+                message.textContent = error;
+                message.className = "invalid";
+            } else {
+                message.textContent = "사용 가능한 비밀번호입니다.";
+                message.className = "valid";
+            }
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+
+            const password = formData.get('password');
+            const passwordError = validatePassword(password);
+
+            if (passwordError !== "") {
+                message.textContent = passwordError;
+                message.className = "invalid";
+                passwordInput.focus();
+                return;
+            }
+
+            const payload = {
+                userId: formData.get('userId'),
+                rawPassword: formData.get('password'),
+                email: formData.get('email')
+            };
+
+            try {
+                    const res = await fetch(API_BASE_URL + '/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (res.status === 201) {
+                    alert('회원가입에 성공했습니다. 로그인 페이지로 이동합니다.');
+                    window.location.href = '/view/auth/login';
+                } else if (res.status === 409) {
+                    const errorBody = await res.json();
+                    alert(errorBody.message || "중복 된 사용자 정보 입니다.");
+                } else {
+                    alert('회원가입에 실패헀습니다. 관리자에게 문의 해주세요.');
+                }
+            } catch (err) {
+                console.error('회원가입 중 오류가 발생했습니다.:', err);
+                alert('알 수 없는 오류가 발생했습니다.');
+            }
+        });
+
+    </script>

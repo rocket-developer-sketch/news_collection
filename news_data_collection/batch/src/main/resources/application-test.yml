@@ -1,0 +1,44 @@
+spring:
+  datasource:
+    batch:
+      url: jdbc:h2:mem:news_batch;DB_CLOSE_DELAY=-1;DATABASE_TO_LOWER=TRUE
+      driver-class-name: org.h2.Driver
+      username: sa
+      password:
+      hikari:
+        maximum-pool-size: 5
+
+    news:
+      url: jdbc:h2:mem:news_api;DB_CLOSE_DELAY=-1;DATABASE_TO_LOWER=TRUE
+      driver-class-name: org.h2.Driver
+      username: sa
+      password:
+      hikari:
+        maximum-pool-size: 5
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        hbm2ddl:
+          auto: create-drop
+  main:
+    allow-bean-definition-overriding: true
+
+#  h2:
+#    console:
+#      enabled: true
+
+  batch:
+#    jdbc:
+#      initialize-schema: always
+    job:
+      enabled: false  # 테스트 중 자동 실행 방지
+
+logging:
+  level:
+    root: INFO
+    com.ddi: DEBUG

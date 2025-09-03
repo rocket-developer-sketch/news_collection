@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="ConfigFragment">
+
+    <head>
+        <meta charset="UTF-8">
+
+        <link rel="stylesheet" th:href="@{/css/style.css}" />
+
+        <script th:inline="javascript">
+            const API_BASE_URL = [[${@environment.getProperty('external.api.url')}]];
+        </script>
+
+    </head>
+</html>

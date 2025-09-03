@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{common/layouts/basic_layout}" layout:fragment="Content">
+
+    <head>
+        <title th:fragment="title">로그인</title>
+        <link rel="stylesheet" th:href="@{/css/login.css}" />
+    </head>
+
+    <div>
+        <h2>로그인</h2>
+
+        <form id="loginForm">
+            <label>아이디: <input type="text" name="userId" value="tester" required /></label><br />
+            <label>비밀번호: <input type="password" name="password" value="tester" required /></label><br />
+            <button type="submit">로그인</button>
+        </form>
+
+        <div id="loginError" style="color:red;"></div>
+
+        <div class="register">
+            <a th:href="@{/view/auth/register}" class="btn btn-register">회원가입</a>
+        </div>
+    </div>
+
+    <script th:inline="javascript">
+
+        document.getElementById('loginForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        const payload = {
+            userId: formData.get('userId'),
+            rawPassword: formData.get('password')
+        };
+
+        try {
+            const res = await fetch(API_BASE_URL + '/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+                credentials: 'include'
+            });
+
+            if (res.ok) {
+                const token = res.headers.get('Authorization');
+                const accessToken = token.split(' ')[1];
+                localStorage.setItem('access_token', accessToken);
+                window.location.href = '/view/article';
+
+            } else {
+                const result = await res.json();
+                document.getElementById('loginError').textContent = result.message || '로그인 중 오류가 발생했습니다.';
+            }
+        } catch {
+            document.getElementById('loginError').textContent = '서버 장애가 발생했습니다.';
+        }
+        });
+
+    </script>
+
+</html>

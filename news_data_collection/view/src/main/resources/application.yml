@@ -1,0 +1,21 @@
+server:
+  error:
+    whitelabel:
+      enabled: false
+
+spring:
+  profiles:
+    active: local
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    cache: false
+    enabled: true
+    check-template-location: true
+#  mvc:
+#    static-path-pattern: /static/**
+  resources:
+    static-locations: classpath:/static/
+

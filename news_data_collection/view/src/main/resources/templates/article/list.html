@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{common/layouts/secure_layout}" layout:fragment="Content">
+
+  <head>
+    <title th:fragment="title">뉴스 목록</title>
+    <link rel="stylesheet" th:href="@{/css/article-list.css}" />
+  </head>
+
+  <body>
+    <div>
+      <h2>내 뉴스 목록</h2>
+      <div class="card-container" id="newsContainer"></div>
+      <div id="scrollSentinel" class="loading">로딩 중</div>
+    </div>
+
+    <script th:src="@{/js/article-list.js}"></script>
+  </body>
+</html>

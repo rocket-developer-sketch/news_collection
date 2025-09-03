@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layouts/secure_layout}" layout:fragment="Content">
+
+<head>
+<title th:fragment="title">스케줄 등록</title>
+<link rel="stylesheet" th:href="@{/css/schedule-setting.css}" />
+</head>
+
+  <body>
+
+    <div>
+      <h2>스케줄 등록</h2>
+
+      <form id="createForm">
+        <label>키워드 (쉼표로 구분):
+          <input type="text" name="keyword" placeholder="키워드를 입력해주세요." required />
+        </label><br>
+
+        <label>뉴스 사이트 선택:
+          <div id="siteOptions">
+          </div>
+        </label><br>
+
+        <label>수집 주기 선택:
+          <select name="interval" id="intervalSelect" required>
+            <option value="">-- 선택 --</option>
+          </select>
+        </label><br>
+
+        <button type="submit">등록</button>
+
+      </form>
+
+      <div class="info">DAUM 은 오늘 일자 데이터부터 수집합니다.</div>
+      <div class="info">GOOGLE 은 하루 100개 제한이 있어 한 번에 최대 6개 까지만 수집합니다.</div>
+
+    </div>
+
+
+    <script th:src="@{/js/option.js}"></script>
+    <script th:src="@{/js/schedule-setting.js}"></script>
+
+  </body>
+</html>

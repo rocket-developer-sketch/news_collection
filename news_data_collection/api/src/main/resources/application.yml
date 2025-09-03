@@ -1,0 +1,27 @@
+spring:
+  # 로컬환경에서 인텔리제이로 디버깅 모드 실행 위한 기본 프로파일 설정
+  profiles:
+    active: local
+    
+  application:
+    name: news-collection-api
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: alpha
+  api-docs:
+    path: /v1/api-docs
+
+auth-conf:
+  protected-paths:
+    - /api/**
+

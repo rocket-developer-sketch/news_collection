@@ -1,0 +1,6 @@
+rootProject.name = 'news_data_collection'
+include 'domain'
+include 'api'
+include 'batch'
+include 'view'
+

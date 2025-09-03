@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="HeaderFragment">
+
+  <header class="header">
+    <h1 class="title">뉴스 수집 시스템</h1>
+
+    <button id="logoutBtn">로그아웃</button>
+
+    <script th:src="@{/js/auth.js}"></script>
+
+    <script th:inline="javascript">
+      const userId = getUserId();
+
+      if (!userId) {
+        window.location.href = '/view/auth/login';
+      }
+
+      const logoutBtn = document.getElementById('logoutBtn');
+
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', logout);
+      }
+    </script>
+
+  </header>
+
+</html>

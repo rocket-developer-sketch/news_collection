@@ -1,0 +1,104 @@
+#scheduleTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+#scheduleTable th,
+#scheduleTable td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+#scheduleTable th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+#scheduleListPage a[href="/view/schedule/new"] {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 6px 12px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+#scheduleListPage a[href="/view/schedule/new"]:hover {
+    background-color: #45a049;
+}
+
+#editPopup {
+    display: none;
+    position: fixed;
+    top: 20%;
+    left: 35%;
+    background: white;
+    padding: 20px;
+    border: 1px solid #888;
+    box-shadow: 0 0 10px #888;
+    z-index: 1000;
+    width: 300px;
+    border-radius: 6px;
+}
+/*
+#editPopup {
+    display: none;
+    position: fixed;
+    top: 20%;
+    left: 35%;
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #888;
+    box-shadow: 0 0 10px #888;
+    z-index: 1000;
+}
+*/
+
+#editPopup label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+#editPopup input[type="checkbox"] {
+    transform: scale(1.2);
+    margin-left: 8px;
+}
+
+#editPopup select {
+    width: 100%;
+    padding: 6px;
+    font-size: 14px;
+}
+
+#editPopup button {
+    margin-top: 10px;
+    padding: 6px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#editPopup button[type="submit"] {
+    background-color: #2196F3;
+    color: white;
+    margin-right: 10px;
+}
+
+#editPopup button[type="submit"]:hover {
+    background-color: #1976D2;
+}
+
+#editPopup button[type="button"] {
+    background-color: #e0e0e0;
+}
+
+#editPopup button[type="button"]:hover {
+    background-color: #c0c0c0;
+}

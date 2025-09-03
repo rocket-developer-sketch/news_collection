@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  mysqldb:
+    image: mysql
+    container_name: mysqldb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin123qwer
+      LANG: ko_KR.UTF-8
+      LANGUAGE: ko_KR:en
+      LC_ALL: ko_KR.UTF-8
+    ports:
+      - "3307:3306"
+    command:
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./sqls:/docker-entrypoint-initdb.d
+      - ../infra/docker/mysql/news/volumes/:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p$${MYSQL_ROOT_PASSWORD} || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      args:
+        MODULE: api
+    container_name: api
+    ports:
+      - "8082:8082"
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+
+  batch:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        MODULE: batch
+    container_name: batch
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+
+  view:
+    build:
+      context: .
+      args:
+        MODULE: view
+    container_name: view
+    depends_on:
+      - api
+    ports:
+      - "8083:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev

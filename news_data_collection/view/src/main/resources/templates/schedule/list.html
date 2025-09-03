@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layouts/secure_layout}" layout:fragment="Content">
+
+    <head>
+        <title th:fragment="title">스케줄 목록</title>
+        <link rel="stylesheet" th:href="@{/css/schedule-list.css}">
+    </head>
+
+    <body>
+        <div id="scheduleListPage">
+            <h2>스케줄 목록</h2>
+            <a th:href="@{/view/schedule/new}">새 스케줄 등록</a>
+            <br/>
+
+            <table border="1" id="scheduleTable">
+                <thead>
+                    <tr>
+                        <th>키워드</th>
+                        <th>뉴스 사이트</th>
+                        <th>주기</th>
+                        <th>활성 여부</th>
+                        <th>액션</th>
+                    </tr>
+                </thead>
+                <tbody id="scheduleBody"></tbody>
+                <tr id="scrollSentinel"></tr>
+            </table>
+
+        </div>
+
+        <div id="editPopup">
+            <form id="editForm">
+                <input type="hidden" name="ruleId">
+                <input type="hidden" name="keyword">
+                <input type="hidden" name="siteName">
+
+                <label>주기:
+                    <select name="interval" id="editIntervalSelect" required></select>
+                </label>
+
+                <br/>
+
+                <label>활성 여부:
+                    <input type="checkbox" name="isActive" id="isActiveToggle" />
+                </label>
+
+                <br/>
+
+                <button type="submit">저장</button>
+                <button type="button" onclick="closePopup()">취소</button>
+            </form>
+        </div>
+
+        <script th:src="@{/js/option.js}"></script>
+        <script th:src="@{/js/schedule-list.js}"></script>
+
+    </body>
+</html>
